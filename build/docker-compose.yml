@@ -1,40 +1,40 @@
 version: "3.5"
 
 services:
-  # app:
-  #   container_name: app
-  #   image: keeper-homepage-app:build
-  #   ports:
-  #     - 8080:8080
-  #   command: tail -f /dev/null
-  #   environment:
-  #     - SECRET=${SECRET}
-  #     - DB_HOST=${DB_HOST}
-  #     - DB_PORT=${DB_PORT}
-  #     - MYSQL_DATABASE=${MYSQL_DATABASE}
-  #     - MYSQL_USER=${MYSQL_USER}
-  #     - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-  #     - REDIS_HOST=${REDIS_HOST}
-  #     - REDIS_PORT=${REDIS_PORT}
-  #     - MAIL_HOST=${MAIL_HOST}
-  #     - MAIL_PORT=${MAIL_PORT}
-  #   depends_on:
-  #     - db
-  #     - redis
+  app:
+    container_name: app
+    image: keeper-homepage-app:build
+    ports:
+      - 8080:8080
+    entrypoint: bash -c "chmod +x /entrypoint.sh && /entrypoint.sh"
+    environment:
+      - SECRET=${SECRET}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+    depends_on:
+      - db
+      - redis
 
-  # db:
-  #   container_name: db
-  #   image: keeper-homepage-db:build
-  #   environment:
-  #     - MYSQL_DATABASE=${MYSQL_DATABASE}
-  #     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-  #     - MYSQL_USER=${MYSQL_USER}
-  #     - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-  #   command:
-  #     - --character-set-server=utf8mb4
-  #     - --collation-server=utf8mb4_unicode_ci
-  #   ports:
-  #     - 3306:3306
+  db:
+    container_name: db
+    image: keeper-homepage-db:build
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - 3306:3306
 
   nginx:
     container_name: nginx
@@ -46,11 +46,11 @@ services:
       # - ./docker/data/nginx/ssl:/etc/letsencrypt
     ports:
       - 8081:80
-    # depends_on:
-    #   - app
+    depends_on:
+      - app
 
-  # redis:
-  #   container_name: redis
-  #   image: redis:7-alpine3.17
-  #   ports:
-  #     - 6379:6379
+  redis:
+    container_name: redis
+    image: redis:7-alpine3.17
+    ports:
+      - 6379:6379

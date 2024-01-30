@@ -1,4 +1,4 @@
-FROM gradle:7.3.2-jdk17
+FROM gradle:7.6-jdk17
 
 WORKDIR /home/keeper
 
@@ -11,4 +11,5 @@ ENV LANG=ko_KR.UTF-8 \
 RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
 COPY docker/data/entrypoint.sh /entrypoint.sh
+COPY docker/data/.env /.env
 COPY docker/data/application.yml /application.yml
