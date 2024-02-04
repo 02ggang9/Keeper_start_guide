@@ -46,7 +46,7 @@ services:
       # - ./docker/data/nginx/conf.d:/etc/nginx/conf.d
       # - ./docker/data/nginx/ssl:/etc/letsencrypt
     ports:
-      - 8081:80
+      - 8080:80
     depends_on:
       - app
 
