@@ -6,6 +6,6 @@ cp /application.yml /home/keeper/src/main/resources/config/application.yml
 
 cd /home/keeper
 
-gradle build bootJar --daemon --build-cache --parallel -x test 
+./gradlew build -x test -x asciidoctor -x copyDocs
 
 java -jar -Duser.timezone=Asia/Seoul /home/keeper/build/libs/homepage-0.0.1-SNAPSHOT.jar

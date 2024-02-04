@@ -30,6 +30,7 @@
 default-character-set=utf8
 
 [mysqld]
+datadir     = /var/lib/mysql
 character-set-client-handshake=FALSE
 init_connect="SET collation_connection=utf8_general_ci"
 init_connect="SET NAMES utf8mb4"
