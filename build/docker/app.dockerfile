@@ -11,5 +11,4 @@ ENV LANG=ko_KR.UTF-8 \
 RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
 COPY docker/data/entrypoint.sh /entrypoint.sh
-COPY docker/data/.env /.env
 COPY docker/data/application.yml /application.yml

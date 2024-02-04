@@ -5,7 +5,7 @@ services:
     container_name: app
     image: keeper-homepage-app:build
     ports:
-      - 8080:8080
+      - 8082:8080
     entrypoint: bash -c "chmod +x /entrypoint.sh && /entrypoint.sh"
     environment:
       - SECRET=${SECRET}
@@ -41,6 +41,7 @@ services:
     image: keeper-homepage-nginx:build
     volumes:
       - ./docker/data/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/data/nginx/nginx.conf:/etc/nginx/nginx.conf
       # - ./docker/data/nginx/nginx.conf:/etc/nginx/nginx.conf
       # - ./docker/data/nginx/conf.d:/etc/nginx/conf.d
       # - ./docker/data/nginx/ssl:/etc/letsencrypt
